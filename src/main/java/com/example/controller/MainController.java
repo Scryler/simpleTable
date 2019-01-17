@@ -23,7 +23,7 @@ public class MainController {
     private PersonRepo personRepo;
 
 
-    private static List<Person> persons = new ArrayList<Person>();
+    //private static List<Person> persons = new ArrayList<Person>();
 
 /*    static {
         persons.add(new Person("Bill", "Gates"));
@@ -49,9 +49,9 @@ public class MainController {
     @RequestMapping(value = { "/personList" }, method = RequestMethod.GET)
     public String personList(Model model) {
 
-        Iterable<Person> people = personRepo.findAll();
+        Iterable<Person> persons = personRepo.findAll();
 
-        model.addAttribute(people);
+        model.addAttribute("persons", persons);
 
         //model.addAttribute("persons", persons);
 
@@ -60,10 +60,6 @@ public class MainController {
 
     @RequestMapping(value = { "/addPerson" }, method = RequestMethod.GET)
     public String showAddPersonPage(Model model) {
-
-/*        Iterable<Person> people = personRepo.findAll();
-
-        model.addAttribute(people);*/
 
         PersonForm personForm = new PersonForm();
 
@@ -83,13 +79,13 @@ public class MainController {
         if (firstName != null && firstName.length() > 0 //
                 && lastName != null && lastName.length() > 0 && action.equals("Create")) {
             Person newPerson = new Person(firstName, lastName);
-            persons.add(newPerson);
+            //persons.add(newPerson);
 
             personRepo.save(newPerson);
 
-            Iterable<Person> people = personRepo.findAll();
+            Iterable<Person> persons = personRepo.findAll();
 
-            model.addAttribute(people);
+            model.addAttribute("persons", persons);
 
             return "redirect:/personList";
         }
