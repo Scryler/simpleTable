@@ -8,6 +8,25 @@
 <body>
 <h1>Person List</h1>
 <a href="addPerson">Add Person</a>
+<div>
+    <form method = "GET" action="edit">
+        <button type="submit">Edit</button>
+    </form>
+</div>
+<div>
+    <form method = "POST" action="delete">
+        <button type="button">Delete</button>
+    </form>
+</div>
+<div>
+    <form method = "POST" action="filter">
+        First Name
+        <input type="text" name="firstName">
+        Last Name
+        <input type="text" name="lastName">
+        <button type="submit">Search</button>
+    </form>
+</div>
 <br/><br/>
 <div>
     <table border="1">
@@ -18,6 +37,7 @@
         <tr th:each ="person : ${persons}">
             <td th:utext="${person.firstName}">...</td>
             <td th:utext="${person.lastName}">...</td>
+            <td><input type="checkbox" name="check" value="${person.id}"></td>
         </tr>
     </table>
 </div>
