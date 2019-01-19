@@ -43,6 +43,7 @@ public class AddPersonController {
                 && lastName != null && lastName.length() > 0
                 && action.equals("Create")) {
             Person newPerson = new Person(firstName, lastName);
+
             personRepo.save(newPerson);
 
             Iterable<Person> persons = personRepo.findAll();

@@ -8,16 +8,7 @@
 <body>
 <h1>Person List</h1>
 <a href="addPerson">Add Person</a>
-<div>
-    <form method = "GET" action="edit">
-        <button type="submit">Edit</button>
-    </form>
-</div>
-<div>
-    <form method = "POST" action="delete">
-        <button type="button">Delete</button>
-    </form>
-</div>
+<h2 th:utext="${message}">..!..</h2>
 <div>
     <form method = "POST" action="filter">
         First Name
@@ -29,17 +20,21 @@
 </div>
 <br/><br/>
 <div>
-    <table border="1">
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-        </tr>
-        <tr th:each ="person : ${persons}">
-            <td th:utext="${person.firstName}">...</td>
-            <td th:utext="${person.lastName}">...</td>
-            <td><input type="checkbox" name="check" value="${person.id}"></td>
-        </tr>
-    </table>
+    <form method = "POST">
+        <button type="submit" formaction="/delete">Delete</button>
+        <button type="submit" formaction="/edit">Edit</button>
+        <table border="1">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+            <tr th:each ="person : ${persons}">
+                <td th:utext="${person.firstName}">...</td>
+                <td th:utext="${person.lastName}">...</td>
+                <td><input type="checkbox"  th:value="${person.id}" name="check"> </td>
+            </tr>
+        </table>
+    </form>
 </div>
 </body>
 </html>

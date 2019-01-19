@@ -6,12 +6,16 @@
 </head>
 <body>
 <div>
-    <table border="1">
-        <tr th:each ="person : ${persons}">
-            <td th:utext="${person.firstName}"></td>
-            <td th:utext="${person.lastName}" ></td>
-        </tr>
-    </table>
+    <form th:action="@{/edit}" th:object="${person}" method="POST">
+        First Name:
+        <input type="text" th:field="*{firstName}" />
+        <br/>
+        Last Name:
+        <input type="text" th:field="*{lastName}" />
+        <br/>
+        <input type="submit" formaction="/accept" name="action" value="Accept"/>
+        <input type="submit" formaction="/accept" name="action" value="Cancel"/>
+    </form>
 </div>
 </body>
 </html>

@@ -6,7 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -58,25 +66,5 @@ public class MainController {
 
     }
 
-    @GetMapping("/edit")
-    public String toEdit(Model model) {
-
-        Iterable<Person> persons = personRepo.findAll();
-
-        model.addAttribute("persons", persons);
-
-        return "edit";
-    }
-
-    @PostMapping("delete")
-    public String deletePerson(Model model,
-                               @RequestParam boolean check,
-                               @RequestParam String firstName,
-                               @RequestParam String lastName){
-
-        Iterable<Person> persons;
-
-        return "personList";
-    }
 }
 
