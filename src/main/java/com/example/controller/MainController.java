@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.domain.Person;
+import com.example.errorMessage.ErrorMessage;
 import com.example.repo.PersonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,14 +23,9 @@ public class MainController {
     @Autowired
     private PersonRepo personRepo;
 
-    @Value("${welcome.message}")
-    private String message;
 
     @GetMapping("/")
-    public String index(Model model) {
-
-        model.addAttribute("message", message);
-
+    public String index() {
         return "index";
     }
 

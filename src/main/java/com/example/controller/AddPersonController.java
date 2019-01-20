@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.domain.Person;
 import com.example.domain.PersonForm;
+import com.example.errorMessage.ErrorMessage;
 import com.example.repo.PersonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,8 +19,6 @@ public class AddPersonController {
     @Autowired
     private PersonRepo personRepo;
 
-    @Value("${error.message}")
-    private String errorMessage;
 
     @GetMapping("/addPerson")
     public String showAddPersonPage(Model model) {
@@ -56,7 +55,7 @@ public class AddPersonController {
         if (action.equals("Cancel"))
             return "redirect:/personList";
 
-        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorMessage", ErrorMessage.ERROR_MESSAGE_ADD);
         return "addPerson";
     }
 }

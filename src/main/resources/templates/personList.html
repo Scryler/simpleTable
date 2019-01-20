@@ -2,13 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" type="text/css" href="css/background.css">
+
+    <div class="container"/>
+
     <title>Person List</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <h1>Person List</h1>
 <a href="addPerson">Add Person</a>
-<h2 th:utext="${message}">..!..</h2>
 <div>
     <form method = "POST" action="filter">
         First Name
@@ -21,6 +30,7 @@
 <br/><br/>
 <div>
     <form method = "POST">
+
         <button type="submit" formaction="/delete">Delete</button>
         <button type="submit" formaction="/edit">Edit</button>
         <table border="1">
@@ -34,6 +44,7 @@
                 <td><input type="checkbox"  th:value="${person.id}" name="check"> </td>
             </tr>
         </table>
+        <div th:if="${errorMessage}" th:utext="${errorMessage}"></div>
     </form>
 </div>
 </body>

@@ -4,6 +4,7 @@ import com.example.domain.Person;
 import com.example.repo.PersonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +43,7 @@ public class EditController {
     }
 
     @PostMapping("/accept")
+    @Transactional
     public String accept(Model model,
                          @ModelAttribute("person") Person person,
                          @RequestParam(value = "action") String action){
@@ -49,14 +51,8 @@ public class EditController {
         if(action.equals("Accept") &&
                 person.getFirstName() != null &&
                 person.getLastName() != null) {
-            personRepo.updateFirstName(person.getFirstName(),id);
-            personRepo.updateLastName(person.getLastName(),id);
-            //Person editPerson = new Person(person.getFirstName(), person.getLastName());
-            /*person.setFirstName(person.getFirstName());
-            person.setLastName(person.getLastName());*/
-            //personRepo.deleteById(id);
 
-            /*personRepo.save(person);*/
+            personRepo.updateFirstNameAndLastName(person.getFirstName(),person.getLastName(),id);
 
             return "redirect:/personList";
         }

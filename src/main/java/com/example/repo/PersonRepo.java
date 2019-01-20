@@ -13,12 +13,10 @@ import java.util.List;
 public interface PersonRepo extends JpaRepository<Person,Integer> {
 
     @Modifying
-    @Query("UPDATE Person p SET p.firstName = :firstName WHERE p.id = :id")
-    void updateFirstName(@Param("firstName") String firstName, @Param("id") int id);
-
-    @Modifying
-    @Query("UPDATE Person p SET p.lastName = :lastName WHERE p.id = :id")
-    void updateLastName(@Param("lastName") String lastName, @Param("id") int id);
+    @Query("UPDATE Person p SET p.firstName =:firstName , p.lastName =:lastName WHERE p.id =:id")
+    void updateFirstNameAndLastName(@Param("firstName") String firstName,
+                                    @Param("lastName") String lastName,
+                                    @Param("id") Integer id);
 
 
     List<Person> findByfirstName (String firstName);
