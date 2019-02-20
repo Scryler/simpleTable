@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.controllerService.MainService;
 import com.example.domain.Person;
 import com.example.errorMessage.ErrorMessage;
 import com.example.repo.PersonRepo;
@@ -21,8 +22,7 @@ import java.util.List;
 public class MainController {
 
     @Autowired
-    private PersonRepo personRepo;
-
+    MainService mainService;
 
     @GetMapping("/")
     public String index() {
@@ -32,7 +32,7 @@ public class MainController {
     @GetMapping("/personList")
     public String personList(Model model) {
 
-        Iterable<Person> persons = personRepo.findAll();
+        Iterable<Person> persons = mainService.getAllPerson();
 
         model.addAttribute("persons", persons);
 
@@ -44,19 +44,7 @@ public class MainController {
                          @RequestParam String firstName,
                          @RequestParam String lastName) {
 
-        Iterable<Person> persons;
-
-        if (!firstName.isEmpty() && lastName.isEmpty()) {
-            persons = personRepo.findByfirstName(firstName);
-        } else if (!lastName.isEmpty() && firstName.isEmpty()) {
-            persons = personRepo.findBylastName(lastName);
-        } else if (!firstName.isEmpty() && !lastName.isEmpty()) {
-            persons = personRepo.findByFirstNameAndLastName(firstName, lastName);
-        } else {
-            persons = personRepo.findAll();
-        }
-
-        model.addAttribute("persons", persons);
+        model.addAttribute("persons", mainService.getPersonsByFilter(firstName,lastName));
 
         return "personList";
 

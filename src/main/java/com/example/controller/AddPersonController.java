@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.controllerService.MainService;
 import com.example.domain.Person;
 import com.example.domain.PersonForm;
 import com.example.errorMessage.ErrorMessage;
@@ -18,6 +19,9 @@ public class AddPersonController {
 
     @Autowired
     private PersonRepo personRepo;
+
+    @Autowired
+    private MainService mainService;
 
 
     @GetMapping("/addPerson")
@@ -41,11 +45,12 @@ public class AddPersonController {
         if (firstName != null && firstName.length() > 0
                 && lastName != null && lastName.length() > 0
                 && action.equals("Create")) {
+
             Person newPerson = new Person(firstName, lastName);
 
             personRepo.save(newPerson);
 
-            Iterable<Person> persons = personRepo.findAll();
+            Iterable<Person> persons = mainService.getAllPerson();
 
             model.addAttribute("persons", persons);
 
